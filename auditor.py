@@ -1,3 +1,5 @@
+# Hey self! This is your first small project, Data Quality Auditor.
+
 # 1
 # This imports the pandas library and gives it a shorter nickname 'pd'
 # pandas is the main tool we use to work with data in Python
