@@ -14,6 +14,8 @@ data quality issues and generates a clean HTML report.
 - Python
 - Pandas
 - HTML/CSS (for report output)
+- SQLite
+- SQL Queries
 
 ## 📁 Project Structure
 ```
