@@ -6,7 +6,7 @@ Hello, this is Gerlit Angela I. Romasanta, a Licensed Electronics Engineer, majo
 
 This folder will have my projects to test and apply my abilities in programming.
 
-### Project 2: Automated Data Quality Auditor
+### Project 1: Automated Data Quality Auditor
 
 In this project, the main goal is to feed it a dataset, check for data quality issues, and spit a report.
 
