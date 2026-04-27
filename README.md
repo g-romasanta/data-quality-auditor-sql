@@ -16,7 +16,7 @@ data quality issues and generates a clean HTML report.
 - HTML/CSS (for report output)
 
 ## 📁 Project Structure
-'''
+```
 Data Quality Auditor/
 │
 ├── data/
@@ -27,7 +27,7 @@ Data Quality Auditor/
 │
 ├── auditor.py
 └── README.md
-'''
+```
 
 ## 🚀 How to Run
 1. Clone the repository
