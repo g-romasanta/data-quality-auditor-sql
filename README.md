@@ -1,7 +1,8 @@
-# 📊 Automated Data Quality Auditor
+# 📊 Automated Data Quality Auditor with SQL
 
-A beginner Python project that automatically checks a CSV dataset for common 
-data quality issues and generates a clean HTML report.
+A Python project that loads CSV data into a SQLite database, runs SQL queries 
+for analysis, checks for common data quality issues, and generates a clean 
+HTML report.
 
 ## 🔍 What It Checks
 - **Missing Values** — detects null/empty cells per column
@@ -9,17 +10,18 @@ data quality issues and generates a clean HTML report.
 - **Data Types** — checks if columns have the expected data types
 - **Outliers** — uses the IQR method to detect unusual values
 - **Calculation Validation** — verifies that computed columns match expected values
+- **Store Summary** — SQL-powered breakdown of transactions, quantity, and revenue per store
 
 ## 🛠️ Tools Used
 - Python
 - Pandas
-- HTML/CSS (for report output)
-- SQLite
+- SQLite (built-in Python library)
 - SQL Queries
+- HTML/CSS (for report output)
 
 ## 📁 Project Structure
 ```
-Data Quality Auditor/
+Data Quality Auditor with SQL/
 │
 ├── data/
 │   └── bookstore_inventory.csv
@@ -38,9 +40,14 @@ Data Quality Auditor/
 4. Run: `python auditor.py`
 5. Open `outputs/report.html` in your browser
 
+## 🔄 Data Pipeline
+```
+CSV → SQLite Database → SQL Query → Pandas → Quality Checks → HTML Report
+```
+
 ## 📌 Sample Output
 The report flags data quality issues with clear ✅ and ⚠️ indicators 
-across all checks.
+across all checks, plus a SQL-generated store performance summary.
 
 ## 👩‍💻 Author
 Gerlit Angela Romasanta  
