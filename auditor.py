@@ -1,26 +1,14 @@
-# Hey self! This is your first small project, Data Quality Auditor, with SQL!
+# Hey self! This is your first small project, Data Quality Auditor.
 
 # 1
 # This imports the pandas library and gives it a shorter nickname 'pd'
 # pandas is the main tool we use to work with data in Python
 import pandas as pd
-import sqlite3  # Built into Python - no pip install needed
 
-# Step 1 - Connect to SQLite (creates the database file if it doesn't exist)
-conn = sqlite3.connect('data/bookstore.db')
-
-# Step 2 - Load the CSV into a pandas DataFrame first
-df_csv = pd.read_csv('data/bookstore_inventory.csv')
-
-# Step 3 - Write the DataFrame into a SQL table called 'inventory'
-# if_exists='replace' means it overwrites the table if it already exists
-df_csv.to_sql('inventory', conn, if_exists='replace', index=False)
-
-# Step 4 - Now query the data back out using SQL
-# This is the key step - we're now READING from the database, not the CSV
-df = pd.read_sql_query("SELECT * FROM inventory", conn)
-
-print("✅ Data loaded into SQLite and queried successfully!")
+# pd.read_csv() opens CSV file and loads it into a DataFrame
+# A DataFrame is like a table — rows and columns, just like Excel
+# We store it in a variable called 'df' (short for DataFrame)
+df = pd.read_csv('data/bookstore_inventory.csv')
 
 # df.head() shows the first 5 rows of data
 # This is just to confirm the file loaded correctly and see what it looks like
@@ -154,23 +142,6 @@ if len(retail_mismatch) > 0:
 # We build the HTML report as one long string
 # Think of it as writing a webpage using Python
 
-summary_query = """
-    SELECT 
-        [to] AS store,
-        COUNT(*) AS total_transactions,
-        SUM(qty) AS total_quantity,
-        ROUND(SUM(extended_cost), 2) AS total_cost,
-        ROUND(SUM(extended_retail), 2) AS total_retail
-    FROM inventory
-    GROUP BY [to]
-    ORDER BY total_retail DESC
-"""
-
-store_summary = pd.read_sql_query(summary_query, conn)
-
-print("\n--- STORE SUMMARY (SQL) ---")
-print(store_summary)
-
 print("\n--- GENERATING REPORT ---")
 
 html = f"""
@@ -280,18 +251,6 @@ html += f"""
     <span class="{'warn' if len(retail_mismatch) > 0 else 'pass'}">{'⚠️ Mismatches Found' if len(retail_mismatch) > 0 else '✅ All Match'}</span></p>
 </div>
 
-<h2>6. Store Summary (SQL Analysis)</h2>
-<table>
-    <tr>
-        <th>Store</th>
-        <th>Total Transactions</th>
-        <th>Total Quantity</th>
-        <th>Total Cost</th>
-        <th>Total Retail</th>
-    </tr>
-    {''.join(f"<tr><td>{row['store']}</td><td>{row['total_transactions']}</td><td>{row['total_quantity']}</td><td>${row['total_cost']:,.2f}</td><td>${row['total_retail']:,.2f}</td></tr>" for _, row in store_summary.iterrows())}
-</table>
-
 </body>
 </html>
 """
@@ -301,22 +260,3 @@ with open('outputs/report.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
 print("✅ Report successfully generated! Check outputs/report.html")
-
-# Bonus SQL query - summarize data by destination store
-# This is pure SQL running inside Python against your database
-summary_query = """
-    SELECT 
-        [to] AS store,
-        COUNT(*) AS total_transactions,
-        SUM(qty) AS total_quantity,
-        ROUND(SUM(extended_cost), 2) AS total_cost,
-        ROUND(SUM(extended_retail), 2) AS total_retail
-    FROM inventory
-    GROUP BY [to]
-    ORDER BY total_retail DESC
-"""
-
-store_summary = pd.read_sql_query(summary_query, conn)
-
-print("\n--- STORE SUMMARY (SQL) ---")
-print(store_summary)
