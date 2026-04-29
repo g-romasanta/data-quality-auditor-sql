@@ -99,8 +99,6 @@ summary_query = """
 
 store_summary = pd.read_sql_query(summary_query, conn)
 
-print("\n--- GENERATING REPORT ---")
-
 html = f"""
 <!DOCTYPE html>
 <html>
@@ -184,7 +182,6 @@ html = f"""
     <tr><th>Column</th><th>Outlier Count</th><th>Lower Bound</th><th>Upper Bound</th><th>Status</th></tr>
 """
 
-# We add outlier rows dynamically for each numerical column
 for col in numerical_cols:
     Q1 = df[col].quantile(0.25)
     Q3 = df[col].quantile(0.75)
@@ -227,10 +224,6 @@ html += f"""
 with open('outputs/report.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print("✅ Report successfully generated! Check outputs/report.html")
-
-# Bonus SQL query - summarize data by destination store
-# This is pure SQL running inside Python against your database
 summary_query = """
     SELECT 
         [to] AS store,
@@ -247,3 +240,6 @@ store_summary = pd.read_sql_query(summary_query, conn)
 
 print("\n--- STORE SUMMARY (SQL) ---")
 print(store_summary)
+
+print("\n--- GENERATING REPORT ---")
+print("✅ Report successfully generated! Check outputs/report.html")
