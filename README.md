@@ -49,6 +49,11 @@ CSV → SQLite Database → SQL Query → Pandas → Quality Checks → HTML Rep
 The report flags data quality issues with clear ✅ and ⚠️ indicators 
 across all checks, plus a SQL-generated store performance summary.
 
+## Power BI Dashboard
+A dashboard built from the same inventory-transfer data: key totals, retail value by store and year, and the top 10 SKUs by retail value.
+
+![Dashboard](dashboard/bookstore_dashboard.png)
+
 ## Author
 Gerlit Angela Romasanta  
 Electronics Engineer | Aspiring Data Engineer
