@@ -55,5 +55,5 @@ A dashboard built from the same inventory-transfer data: key totals, retail valu
 ![Dashboard](dashboard/bookstore_dashboard.png)
 
 ## Author
-Gerlit Angela Romasanta  
-Electronics Engineer | Aspiring Data Engineer
+Gerlit Angela I. Romasanta  
+Licensed Electronics Engineer | Aspiring Data Engineer
